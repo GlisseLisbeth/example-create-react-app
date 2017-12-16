@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import FilteredProductTable from './components/FilteredProductTable.jsx';
 
-import SearchBar from './components/SearchBar';
+var PRODUCTS = [
+  { category: 'Sporting Goods', price: 'S/.49.99', stocked: true, name: 'Football' },
+  { category: 'Sporting Goods', price: 'S/.9.99', stocked: true, name: 'Baseball' },
+  { category: 'Sporting Goods', price: 'S/.29.99', stocked: true, name: 'Basketball' },
+  { category: 'Sporting Goods', price: 'S/.4999.99', stocked: true, name: 'TV' },
+  { category: 'Sporting Goods', price: 'S/.399.99', stocked: true, name: 'iPhone' },
+];
 
 class App extends Component {
   render() {
@@ -12,8 +19,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <br/>
-        <SearchBar placeholderProp="Ingrese el texto a buscar" />
+        <br />
+        <FilteredProductTable products={PRODUCTS}/>
       </div>
     );
   }
