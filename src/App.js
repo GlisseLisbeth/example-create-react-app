@@ -3,8 +3,33 @@ import logo from './logo.svg';
 import './App.css';
 
 import SearchBar from './components/SearchBar';
+import ProductForm from './components/ProductForm.jsx';
+
+var arrayProductos = [
+  {nombre: 'computadora', precio: '3000'},
+  {nombre: 'latop', precio: '2500'},
+  {nombre: 'celular', precio: '800'}
+];
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      name: ''
+    };
+
+    this.onChangeValue = this.onChangeValue.bind(this);
+  }
+
+  onChangeValue(ev) {
+    var nombre = ev.target.value;
+
+    this.setState({
+      name: nombre
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,7 +38,15 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <br/>
-        <SearchBar placeholderProp="Ingrese el texto a buscar" />
+        <ProductForm
+          productos={arrayProductos}
+        />
+        <br/>
+        Nombre: <input type="text" placeholder={"Ingresar nombre ..."} onChange={this.onChangeValue} />
+        <br />
+        <br />
+        <br />
+        <label style={{ textAlign: 'center', color: 'green' }}>{this.state.name}</label>
       </div>
     );
   }
