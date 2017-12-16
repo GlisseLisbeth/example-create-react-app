@@ -16,3 +16,4 @@ const MaterialUITheme = () => (
 ReactDOM.render(<MaterialUITheme />, document.getElementById('root'));
 
 registerServiceWorker();
+

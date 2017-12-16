@@ -5,6 +5,8 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import ProductForm from './components/ProductForm.jsx';
 
+import Dialogo from './components/Dialogo';
+
 var arrayProductos = [
   {nombre: 'computadora', precio: '3000'},
   {nombre: 'latop', precio: '2500'},
@@ -14,7 +16,7 @@ var arrayProductos = [
 class App extends Component {
   constructor(props){
     super(props);
-
+    console.log('constructor');
     this.state = {
       name: ''
     };
@@ -28,6 +30,10 @@ class App extends Component {
     this.setState({
       name: nombre
     });
+  }
+
+  componentDidMount() {
+    console.log('component did mount!');
   }
 
   render() {
@@ -47,6 +53,8 @@ class App extends Component {
         <br />
         <br />
         <label style={{ textAlign: 'center', color: 'green' }}>{this.state.name}</label>
+
+        <Dialogo />
       </div>
     );
   }
