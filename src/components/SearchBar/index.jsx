@@ -8,30 +8,19 @@ import { Card, CardActions, CardText } from 'material-ui/Card';
 
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
-import { grey400, darkBlack } from 'material-ui/styles/colors';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
+import { darkBlack } from 'material-ui/styles/colors';
 
-const iconButtonElement = (
-    <IconButton
-        touch={true}
-        tooltip="more"
-        tooltipPosition="bottom-left"
-    >
-        <MoreVertIcon color={grey400} />
-    </IconButton>
+// importamos los componentes actions y dialogs
+import Actions from '../Actions';
+import Dialogs from '../Dialog';
+
+const personaComponent = (person) => (
+    <div style={{paddingLeft: '60px'}}>
+        {person.nombre + person.apellido}
+    </div>
 );
 
-const rightIconMenu = (
-    <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem>Reply</MenuItem>
-        <MenuItem>Forward</MenuItem>
-        <MenuItem>Delete</MenuItem>
-    </IconMenu>
-);
 
 class SearchBar extends Component {
     // Se puede declarar dentro de una clase componente de React
@@ -60,9 +49,7 @@ class SearchBar extends Component {
     }
     // Manejar el evento onClick para el boton search
     _handleOnClickSearch(val) {
-
-        this.getPersonasFromApiAsync(val);
-        
+        this.getPersonasFromApiAsync(val);        
     }
 
     getPersonasFromApiAsync(query) {
@@ -82,14 +69,14 @@ class SearchBar extends Component {
 
         const listItems = personasArray.length > -1 ? personasArray.map((persona) =>
             <List key={persona.id.toString()}>
-                <ListItem style={{ textAlign: 'left' }}
-                    leftAvatar={<Avatar style={{ width: 100, height: 100, top: '-8px' }} src={persona.foto} />}
-                    rightIconButton={rightIconMenu}
-                    primaryText="Brendan Lim"
+                <ListItem style={{ textAlign: 'left'}}
+                    leftAvatar={<Avatar style={{ width: 100, height: 100, top: '-8px'}}
+                    src={persona.foto} />}                    
+                    primaryText={personaComponent(persona)}
                     secondaryText={
-                        <p>
-                            <span style={{ color: darkBlack }}>{persona.nombre + persona.apellido}</span><br />
-                            I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                        <p style={{paddingLeft: '60px'}}>
+                            <span style={{ color: darkBlack }}>{persona.ciudad }</span><br />
+                           <span>{persona.email}</span>
                 </p>
                     }
                     secondaryTextLines={2}
@@ -99,7 +86,7 @@ class SearchBar extends Component {
         ) : [];
 
         return (
-            <div>
+            <div>               
                 <div style={{ position: 'relative', display: 'inline-block' }}>
                     <IconButton onClick={(event) => this._handleOnClickSearch(this.state.searchValue)} tooltip="Click para buscar" touch={true} style={{ position: 'absolute', right: 0, top: 0, width: 20, height: 20 }}>
                         <SearchIcon />
@@ -113,7 +100,6 @@ class SearchBar extends Component {
 
                 <Card expanded={true} onExpandChange={this.handleExpandChange} style={{ width: '50%', margin: 'auto' }}>
                     <CardText>
-
                         {
                             listItems
                         }
